@@ -1,0 +1,6 @@
+- props are objs that can pass data (i.e. attributes) 
+from parent (wrapping) component to a child (embedded) component.
+
+- state is a property of the component itself
+
+
