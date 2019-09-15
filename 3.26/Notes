@@ -3,4 +3,5 @@ from parent (wrapping) component to a child (embedded) component.
 
 - state is a property of the component itself
 
-
+- to change state, use this.setState to reference specific obj to
+change. this.state targets entire state of class App  
