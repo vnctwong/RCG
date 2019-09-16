@@ -1,43 +1,53 @@
-import React, { Component } from 'react';
-import './App.css';
-import Person from './Person/Person';
+import React, { useState } from "react";
+import "./App.css";
+import Person from "./Person/Person";
 
-class App extends Component {
-  state = {
+const app = props => {
+  const [personsState, setPersonsState] = useState({
     persons: [
-      { name: 'max', age: 28 },
-      { name: 'manu', age: 29 },
-      { name: 'steph', age: 26 },
-    ]
-  }
+      { name: "max", age: 28 },
+      { name: "manu", age: 29 },
+      { name: "steph", age: 26 }
+    ],
+    otherState: "some other value"
+  });
 
-  switchNameHandler = () => {
-    // console.log('was clicked');
-    // this.state.persons[0].name = 'maxy';
-    this.setState({
+  const [otherState, setPersonsState] = useState("some other value");
+
+  const switchNameHandler = () => {
+    // personsState.persons[0].name = 'maxy';
+    setPersonsState({
       persons: [
-        { name: 'maxie', age: 28 },
-        { name: 'manu', age: 29 },
-        { name: 'steph', age: 27 },
-      ],
-      otherState: 'some other value'
-    })
-  }
+        { name: "maximilion", age: 28 },
+        { name: "manu", age: 29 },
+        { name: "stephanie", age: 27 }
+      ]
+    });
+    console.log("button onClick called switchNameHandler");
+  };
 
-  render() {
-    return (
-      <div className="App">
-        <h1> Hi, I'm a react App </h1>
-        <p>This is working</p>
-        <button onClick={this.switchNameHandler}>Switch Name</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age} >My hobbies: racing</Person>
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
-      </div>
-      // <h1>Another heading</h1>
-    );
-    //return React.createElement('div', { className: 'App' }, React.createElement('h1', null, 'Does this work now'))
-  }
-}
+  return (
+    <div className="App">
+      <h1> Hi, I'm a react App </h1>
+      <p>This is working</p>
+      <button onClick={switchNameHandler}>Switch Name</button>
+      <Person
+        name={personsState.persons[0].name}
+        age={personsState.persons[0].age}
+      />
+      <Person
+        name={personsState.persons[1].name}
+        age={personsState.persons[1].age}
+      >
+        My hobbies: racing
+      </Person>
+      <Person
+        name={personsState.persons[2].name}
+        age={personsState.persons[2].age}
+      />
+    </div>
+    // <h1>Another heading</h1>
+  );
+};
 
-export default App;
+export default app;
