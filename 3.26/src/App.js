@@ -8,28 +8,28 @@ class App extends Component {
       { name: "max", age: 28 },
       { name: "manu", age: 29 },
       { name: "steph", age: 26 }
-    ]
+    ],
+    otherState: 'some other state'
   };
 
-  switchNameHandler = newName => {
+  switchNameHandler = () => {
     // console.log('was clicked');
     // this.state.persons[0].name = 'maxy';
     this.setState({
       persons: [
-        { name: "newName", age: 28 },
+        { name: "maxiimilian", age: 28 },
         { name: "manu", age: 29 },
-        { name: "steph", age: 27 }
-      ],
-      otherState: "some other value"
-    });
-  };
+        { name: "stephanie", age: 27 }
+      ]
+    })
+  }
 
   render() {
     return (
       <div className="App">
         <h1> Hi, I'm a react App </h1>
         <p>This is working</p>
-        <button onClick={this.switchNameHandler.bind(this, 'Maximilion')}>Switch Name</button>
+        <button onClick={this.switchNameHandler}>Switch Name</button>
         <Person
           name={this.state.persons[0].name}
           age={this.state.persons[0].age}
@@ -37,7 +37,7 @@ class App extends Component {
         <Person
           name={this.state.persons[1].name}
           age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, 'max!')}
+          click={this.switchNameHandler}
         >
           My hobbies: racing
         </Person>

@@ -1,6 +1,6 @@
 import React from "react";
 
-const person = props => {
+const person = (props) => {
   return (
     <div>
       <p onClick={props.click}>
