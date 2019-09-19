@@ -1,21 +1,26 @@
+
 import React, { Component } from "react";
 import "./App.css";
 import Person from "./Person/Person";
 
-class App extends Component {
-  state = {
+const app = props => {
+  const [personsState, setPersonsState] = useState({
     persons: [
       { name: "max", age: 28 },
       { name: "manu", age: 29 },
       { name: "steph", age: 26 }
     ],
+
     otherState: 'some other state'
   };
 
-  switchNameHandler = () => {
-    // console.log('was clicked');
-    // this.state.persons[0].name = 'maxy';
-    this.setState({
+  const [otherState, setOtherState] = useState("some other value");
+
+  console.log(personsState, otherState);
+
+  const switchNameHandler = () => {
+    // personsState.persons[0].name = 'maximilion';
+    setPersonsState({
       persons: [
         { name: "maxiimilian", age: 28 },
         { name: "manu", age: 29 },
@@ -51,5 +56,4 @@ class App extends Component {
     //return React.createElement('div', { className: 'App' }, React.createElement('h1', null, 'Does this work now'))
   }
 }
-
-export default App;
+export default app;
