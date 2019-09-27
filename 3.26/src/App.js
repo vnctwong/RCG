@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
 import Person from "./Person/Person";
-import Radium, { StyleRoot } from 'radium';
 
 class App extends Component {
   state = {
@@ -28,9 +27,7 @@ class App extends Component {
     const persons = [...this.state.persons];
     persons[personIndex] = person;
 
-    this.setState({
-      persons: [person]
-    })
+    this.setState({ persons: persons });
   };
 
   deletePersonHandler = (personIndex) => {
@@ -54,10 +51,6 @@ class App extends Component {
       bordor: '1px solid blue',
       padding: '8px',
       cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
     };
 
     let persons = null;
@@ -77,10 +70,6 @@ class App extends Component {
       );
 
       style.backgroundColor = 'red';
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
     }
 
     let classes = [];
@@ -93,20 +82,20 @@ class App extends Component {
 
 
     return (
-      <StyleRoot>
-        <div className="App">
-          <h1> Hi, I'm a react App </h1>
-          <p className={classes.join(' ')}>This is working</p>
-          <button
-            style={style}
-            onClick={this.togglePersonHandler}>Toggle persons</button>
-          {persons}
-        </div >
-      </StyleRoot>
+
+      <div className="App">
+        <h1> Hi, I'm a react App </h1>
+        <p className={classes.join(' ')}>This is working</p>
+        <button
+          style={style}
+          onClick={this.togglePersonHandler}>Toggle persons</button>
+        {persons}
+      </div >
+
       // <h1>Another heading</h1>
     );
     //return React.createElement('div', { className: 'App' }, React.createElement('h1', null, 'Does this work now'))
   }
 }
 
-export default Radium(App);
+export default (App);
