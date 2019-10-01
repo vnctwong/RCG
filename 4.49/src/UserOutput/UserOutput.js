@@ -7,4 +7,6 @@ const userOutput = () => {
       <p>Some random text2</p>
     </div>
   )
-}
+};
+
+export default userOutput;
