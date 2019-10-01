@@ -10,6 +10,10 @@ class App extends Component {
     username: 'supermax'
   }
 
+  UserInputChangedHandler = (event) => {
+    this.setState({ username: event.target.value })
+  }
+
   render() {
     return (
       <div className="App">
