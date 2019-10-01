@@ -5,6 +5,11 @@ import UserOutput from './UserOutput/UserOutput';
 
 
 class App extends Component {
+
+  state = {
+    username: 'supermax'
+  }
+
   render() {
     return (
       <div className="App">
@@ -22,8 +27,8 @@ class App extends Component {
         </ol>
 
         <UserInput />
-        <UserOutput userName='max' />
-        <UserOutput userName='bob' />
+        <UserOutput userName={this.state.username} />
+        <UserOutput userName={this.state.username} />
         <UserOutput userName='kek' />
 
       </div>
