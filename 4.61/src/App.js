@@ -13,6 +13,11 @@ class App extends Component {
   }
 
   render() {
+
+    const charList = this.state.userInput.split('').map((char, index) => {
+      return <Char character={char} key={index} />;
+    });
+
     return (
       <div className="App">
         <ol>
@@ -26,6 +31,7 @@ class App extends Component {
         <p>Hint: Keep in mind that JavaScript strings are basically arrays!</p>
         <hr />
 
+
         <input
           type='text'
           onChange={this.inputChangedHandler}
@@ -33,6 +39,8 @@ class App extends Component {
 
         <p>{this.state.userInput}</p>
         <Validation inputLength={this.state.userInput.length} />
+
+        {charList}
 
       </div>
     );
