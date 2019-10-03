@@ -33,7 +33,6 @@ class App extends Component {
       p => { return p.id === id }
     );
 
-
     const person = { ...this.state.persons[personIndex] };
     person.name = event.target.value;
 
@@ -44,7 +43,6 @@ class App extends Component {
   };
 
   deletePersonHandler = (personIndex) => {
-
     const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({ persons: persons })
@@ -74,7 +72,8 @@ class App extends Component {
           title={this.props.appTitle}
           showPersons={this.state.showPersons}
           persons={this.state.persons}
-          clicked={this.togglePersonHandler} />
+          clicked={this.togglePersonHandler}
+        />
 
         {persons}
       </div >
