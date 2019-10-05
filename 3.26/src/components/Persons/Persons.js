@@ -2,17 +2,24 @@ import React, { Component } from 'react';
 import Person from './Person/Person';
 
 class Persons extends Component {
-  static getDerivedStateFromProps(props, state) {
-    console.log('[Persons.js] getDerivedStateFromProps');
-    return state;
-  }
+  // static getDerivedStateFromProps(props, state) {
+  //   console.log('[Persons.js] getDerivedStateFromProps');
+  //   return state;
+  // }
 
   shouldComponentUpdate(nextProps, nextState) {
     console.log('[Persons.js] getSnapshotBeforeUpdate')
+    return true;
   }
 
-  componentDidUpdate() {
-    console.log('[App.js] componentDidMount');
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    console.log('[Persons.js] getSnapshotBeforeUpdate');
+    return { prevProps: this.props };
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log('[App.js] componentDidUpdate');
+    console.log(snapshot);
   }
 
   render() {
