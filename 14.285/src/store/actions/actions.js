@@ -38,6 +38,14 @@ export const storeResult = (rslt) => {
   };
 };
 
+export const storeResultAsync = (rslt) => {
+  return dispatch => {
+    setTimeout(() => {
+      dispatch(storeResult(rslt));
+    }, 5000);
+  }
+};
+
 export const deleteResult = (rsltElId) => {
   return {
     type: DELETE_RESULT,
