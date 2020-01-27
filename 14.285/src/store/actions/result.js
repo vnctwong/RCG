@@ -8,7 +8,7 @@ export const storeResult = (rslt) => {
 };
 
 export const storeResultAsync = (rslt) => {
-  return dispatch => {
+  return (dispatch, getState) => {
     setTimeout(() => {
       dispatch(storeResult(rslt));
     }, 5000);
