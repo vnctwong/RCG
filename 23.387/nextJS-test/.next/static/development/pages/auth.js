@@ -73,7 +73,7 @@ var authIndexPage = function authIndexPage() {
 
 /***/ }),
 
-/***/ 3:
+/***/ 2:
 /*!*******************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fauth&absolutePagePath=%2FUsers%2Fvwmac%2FProjects%2FRCG%2F23.387%2FnextJS-test%2Fpages%2Fauth%2Findex.js ***!
   \*******************************************************************************************************************************************************/
@@ -96,5 +96,5 @@ module.exports = dll_2adc2403d89adc16ead0;
 
 /***/ })
 
-},[[3,"static/runtime/webpack.js"]]]);
+},[[2,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=auth.js.map
