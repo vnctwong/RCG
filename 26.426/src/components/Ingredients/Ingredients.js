@@ -8,11 +8,8 @@ const Ingredients = () => {
   const [userIngredients, setUserIngredients] = useState([]);
 
   useEffect(() => {
-
-  });
-
-  fetch('https://hooks-prac-default-rtdb.firebaseio.com/ingredients.json')
-    .then(response => response.json()
+    fetch('https://hooks-prac-default-rtdb.firebaseio.com/ingredients.json')
+      .then(response => response.json())
       .then(responseData => {
         const loadedIngredients = [];
         for (const key in responseData) {
@@ -22,7 +19,9 @@ const Ingredients = () => {
             amount: responseData[key].amount
           });
         }
-      }));
+        setUserIngredients(loadedIngredients);
+      });
+  }, []);
 
   const addIngredientHandler = ingredient => {
     fetch('https://hooks-prac-default-rtdb.firebaseio.com/ingredients.json', {
