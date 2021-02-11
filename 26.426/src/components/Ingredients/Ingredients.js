@@ -23,6 +23,10 @@ const Ingredients = () => {
       });
   }, []);
 
+  const filteredIngredientsHandler = filteredIngredients => {
+    setUserIngredients(filteredIngredients);
+  }
+
   const addIngredientHandler = ingredient => {
     fetch('https://hooks-prac-default-rtdb.firebaseio.com/ingredients.json', {
       method: 'POST',
@@ -45,7 +49,7 @@ const Ingredients = () => {
       <IngredientForm onAddIngredient={addIngredientHandler} />
 
       <section>
-        <Search />
+        <Search onLoadIngredients={filteredIngredientsHandler} />
         <IngredientList ingredients={userIngredients} onRemoveItem={() => { }} />
       </section>
     </div>
