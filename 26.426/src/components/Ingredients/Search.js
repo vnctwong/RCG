@@ -5,10 +5,11 @@ import './Search.css';
 
 const Search = React.memo(props => {
   const { onLoadIngredients } = props;
-  const [enteredfilter, setEnteredFilter] = useState('');
+  const [enteredFilter, setEnteredFilter] = useState('');
 
   useEffect(() => {
-    fetch('https://hooks-prac-default-rtdb.firebaseio.com/ingredients.json')
+    const query = enteredFilter.length === 0 ? '' : `?orderBy="title"&equalTo="${enteredFilter}"`;
+    fetch('https://hooks-prac-default-rtdb.firebaseio.com/ingredients.json' + query)
       .then(response => response.json())
       .then(responseData => {
         const loadedIngredients = [];
@@ -19,9 +20,9 @@ const Search = React.memo(props => {
             amount: responseData[key].amount
           });
         }
-        onLoadIngredients(loadedIngredients);
+        // onLoadIngredients(loadedIngredients);
       });
-  }, [enteredfilter, onLoadIngredients]);
+  }, [enteredFilter, onLoadIngredients]);
 
   return (
     <section className="search">
@@ -30,8 +31,8 @@ const Search = React.memo(props => {
           <label>Filter by Title</label>
           <input
             type="text"
-            value={enteredfilter}
-            onChange={event => enteredfilter(event.target.value)} />
+            value={enteredFilter}
+            onChange={event => enteredFilter(event.target.value)} />
         </div>
       </Card>
     </section>
