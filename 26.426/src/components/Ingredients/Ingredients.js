@@ -15,7 +15,9 @@ const Ingredients = () => {
   };
 
   const removeIngredientHandler = ingredient => {
-
+    setUserIngredients(prevIngredients => {
+      []
+    })
   };
 
   return (
@@ -24,7 +26,7 @@ const Ingredients = () => {
 
       <section>
         <Search />
-        <IngredientList ingredients={userIngredients} onRemoveItem={() => { removeIngredientHandler }} />
+        <IngredientList ingredients={userIngredients} onRemoveItem={removeIngredientHandler} />
       </section>
     </div>
   );
