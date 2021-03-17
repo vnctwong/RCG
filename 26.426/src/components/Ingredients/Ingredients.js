@@ -14,10 +14,10 @@ const Ingredients = () => {
     ]);
   };
 
-  const removeIngredientHandler = ingredient => {
-    setUserIngredients(prevIngredients => {
-      []
-    })
+  const removeIngredientHandler = ingredientId => {
+    setUserIngredients(prevIngredients =>
+      prevIngredients.filter((ingredient) => ingredient.id !== ingredientId)
+    );
   };
 
   return (
