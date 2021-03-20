@@ -8,10 +8,18 @@ const Ingredients = () => {
   const [userIngredients, setUserIngredients] = useState([]);
 
   const addIngredientHandler = ingredient => {
-    setUserIngredients(prevIngredients => [
-      ...prevIngredients,
-      { id: Math.random().toString(), ...ingredient }
-    ]);
+    fetch('https://hooks-prac-default-rtdb.firebaseio.com/', {
+      method: 'POST',
+      body: JSON.stringify(ingredient),
+      header: { 'Content-Type': 'application/json' }
+    }).then(response => {
+      return response.json();
+    }).then(responseData => {
+      setUserIngredients(prevIngredients => [
+        ...prevIngredients,
+        { id: responseData.name, ...ingredient }
+      ]);
+    });
   };
 
   const removeIngredientHandler = ingredientId => {
