@@ -8,7 +8,7 @@ const Ingredients = () => {
   const [userIngredients, setUserIngredients] = useState([]);
 
   const addIngredientHandler = ingredient => {
-    fetch('https://hooks-prac-default-rtdb.firebaseio.com/', {
+    fetch('https://rcg-26-426-default-rtdb.firebaseio.com/ingredients.json', {
       method: 'POST',
       body: JSON.stringify(ingredient),
       header: { 'Content-Type': 'application/json' }
