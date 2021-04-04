@@ -12,20 +12,27 @@ const Ingredients = () => {
       method: 'POST',
       body: JSON.stringify(ingredient),
       header: { 'Content-Type': 'application/json' }
-    }).then(response => {
-      return response.json();
-    }).then(responseData => {
-      setUserIngredients(prevIngredients => [
-        ...prevIngredients,
-        { id: responseData.name, ...ingredient }
-      ]);
-    });
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(responseData => {
+        setUserIngredients(prevIngredients => [
+          ...prevIngredients,
+          { id: responseData.name, ...ingredient }
+        ]);
+      });
   };
 
   const removeIngredientHandler = ingredientId => {
-    setUserIngredients(prevIngredients =>
-      prevIngredients.filter((ingredient) => ingredient.id !== ingredientId)
-    );
+    fetch(`https://rcg-26-426-default-rtdb.firebaseio.com/ingredients/${ingredientId}.json`, {
+      method: 'DELETE',
+    })
+      .then(response => {
+        setUserIngredients(prevIngredients =>
+          prevIngredients.filter((ingredient) => ingredient.id !== ingredientId)
+        );
+      })
   };
 
   const filteredIngredientsHandler = useCallback(filteredIngredients => {
