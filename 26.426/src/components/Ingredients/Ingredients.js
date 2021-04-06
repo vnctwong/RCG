@@ -6,14 +6,17 @@ import Search from './Search';
 
 const Ingredients = () => {
   const [userIngredients, setUserIngredients] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const addIngredientHandler = ingredient => {
+    setIsLoading(true);
     fetch('https://rcg-26-426-default-rtdb.firebaseio.com/ingredients.json', {
       method: 'POST',
       body: JSON.stringify(ingredient),
       header: { 'Content-Type': 'application/json' }
     })
       .then(response => {
+        setIsLoading(false);
         return response.json();
       })
       .then(responseData => {
@@ -25,14 +28,14 @@ const Ingredients = () => {
   };
 
   const removeIngredientHandler = ingredientId => {
-    fetch(`https://rcg-26-426-default-rtdb.firebaseio.com/ingredients/${ingredientId}.json`, {
-      method: 'DELETE',
-    })
+    setIsLoading(true);
+    fetch(`https://rcg-26-426-default-rtdb.firebaseio.com/ingredients/${ingredientId}.json`,
+      { method: 'DELETE' })
       .then(response => {
         setUserIngredients(prevIngredients =>
           prevIngredients.filter((ingredient) => ingredient.id !== ingredientId)
         );
-      })
+      });
   };
 
   const filteredIngredientsHandler = useCallback(filteredIngredients => {
@@ -41,7 +44,7 @@ const Ingredients = () => {
 
   return (
     <div className="App">
-      <IngredientForm onAddIngredient={addIngredientHandler} />
+      <IngredientForm onAddIngredient={addIngredientHandler} loading={isLoading} />
 
       <section>
         <Search onLoadIngredients={filteredIngredientsHandler} />
