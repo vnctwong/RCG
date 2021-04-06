@@ -32,6 +32,7 @@ const Ingredients = () => {
     fetch(`https://rcg-26-426-default-rtdb.firebaseio.com/ingredients/${ingredientId}.json`,
       { method: 'DELETE' })
       .then(response => {
+        setIsLoading(false);
         setUserIngredients(prevIngredients =>
           prevIngredients.filter((ingredient) => ingredient.id !== ingredientId)
         );
@@ -48,7 +49,9 @@ const Ingredients = () => {
 
       <section>
         <Search onLoadIngredients={filteredIngredientsHandler} />
-        <IngredientList ingredients={userIngredients} onRemoveItem={removeIngredientHandler} />
+        <IngredientList
+          ingredients={userIngredients}
+          onRemoveItem={removeIngredientHandler} />
       </section>
     </div>
   );
