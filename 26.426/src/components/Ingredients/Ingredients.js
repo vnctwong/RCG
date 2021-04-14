@@ -1,4 +1,4 @@
-import React, { useReducer, useCallback } from 'react';
+import React, { useReducer, useState, useEffect, useCallback } from 'react';
 
 import IngredientForm from './IngredientForm';
 import IngredientList from './IngredientList';
@@ -10,12 +10,13 @@ const ingredientReducer = (currentIngredients, action) => {
     case 'SET':
       return action.ingredients;
     case 'ADD':
-      return [...currentIngredients, action.ingredient]
+      return [...currentIngredients, action.ingredient];
     case 'DELETE':
       return currentIngredients.filter(ing => ing.id !== action.id);
-    default: throw new Error('This is error');
+    default:
+      throw new Error('should nto get here');
   }
-}
+};
 
 const Ingredients = () => {
   const [userIngredients, dispatch] = useReducer(ingredientReducer, []);
@@ -35,10 +36,11 @@ const Ingredients = () => {
         return response.json();
       })
       .then(responseData => {
-        setUserIngredients(prevIngredients => [
-          ...prevIngredients,
-          { id: responseData.name, ...ingredient }
-        ]);
+        // setUserIngredients(prevIngredients => [
+        //   ...prevIngredients,
+        //   { id: responseData.name, ...ingredient }
+        // ]);
+        dispatch({ type: 'ADD', ingredient: { id: responseData.name, ...ingredient } })
       });
   };
 
@@ -48,9 +50,9 @@ const Ingredients = () => {
       { method: 'DELETE' })
       .then(response => {
         setIsLoading(false);
-        setUserIngredients(prevIngredients =>
-          prevIngredients.filter((ingredient) => ingredient.id !== ingredientId)
-        );
+        // setUserIngredients(prevIngredients =>
+        //   prevIngredients.filter((ingredient) => ingredient.id !== ingredientId)
+        // );
       }).catch(error => {
         setError('Error Message Here');
         setIsLoading(false);
