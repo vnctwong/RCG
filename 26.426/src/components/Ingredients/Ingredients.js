@@ -46,13 +46,14 @@ const Ingredients = () => {
 
   const removeIngredientHandler = ingredientId => {
     setIsLoading(true);
-    fetch(`https://rcg-26-426-default-rtdb.firebaseio.com/ingredients/${ingredientId}.jon`,
+    fetch(`https://rcg-26-426-default-rtdb.firebaseio.com/ingredients/${ingredientId}.json`,
       { method: 'DELETE' })
       .then(response => {
         setIsLoading(false);
         // setUserIngredients(prevIngredients =>
         //   prevIngredients.filter((ingredient) => ingredient.id !== ingredientId)
         // );
+        dispatch({ type: 'DELETE', id: ingredientId });
       }).catch(error => {
         setError('Error Message Here');
         setIsLoading(false);
