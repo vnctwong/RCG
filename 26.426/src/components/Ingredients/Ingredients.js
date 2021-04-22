@@ -21,8 +21,11 @@ const ingredientReducer = (currentIngredients, action) => {
 const httpReducer = (httpState, action) => {
   switch (action.type) {
     case 'SEND':
+      return { loading: true, error: null };
     case 'RESPONSE':
+      return { ...httpState, loading: false };
     case 'ERROR':
+      return { loading: false, error: action.errorData }
     default:
       throw new Error('should not be reached');
   }
@@ -30,6 +33,7 @@ const httpReducer = (httpState, action) => {
 
 const Ingredients = () => {
   const [userIngredients, dispatch] = useReducer(ingredientReducer, []);
+  const [] = useReducer(httpReducer, { loading: false, error: null });
   // const [userIngredients, setUserIngredients] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
