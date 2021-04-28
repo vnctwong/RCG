@@ -8,6 +8,7 @@ import Search from './Search';
 const ingredientReducer = (currentIngredients, action) => {
   switch (action.type) {
     case 'SET':
+      return action.ingredients;
     case 'ADD':
     case 'DELETE':
     default:
