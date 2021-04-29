@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect, useCallback } from 'react';
+import React, { useReducer, useState, useEffect, useCallback } from 'react';
 
 import IngredientForm from './IngredientForm';
 import IngredientList from './IngredientList';
@@ -10,13 +10,16 @@ const ingredientReducer = (currentIngredients, action) => {
     case 'SET':
       return action.ingredients;
     case 'ADD':
+      return [...currentIngredients, action.ingredient];
     case 'DELETE':
+      return currentIngredients.filter(ing => ing.id !== action.id);
     default:
       throw new Error('Should not reach here');
   }
 }
 
 const Ingredients = () => {
+  useReducer(ingredientReducer, []);
   const [userIngredients, setUserIngredients] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
