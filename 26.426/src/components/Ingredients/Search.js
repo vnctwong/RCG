@@ -12,12 +12,9 @@ const Search = React.memo(props => {
     const timer = setTimeout(() => {
       if (enteredFilter === inputRef.current.value) {
         const query =
-          enteredFilter.length === 0
-            ? ''
-            : `?orderBy="title"&equalTo="${enteredFilter}"`;
-        fetch(
-          'https://rcg-26-426-default-rtdb.firebaseio.com/ingredients.json' + query
-        )
+          enteredFilter.length === 0 ? '' : `?orderBy="title"&equalTo="${enteredFilter}"`;
+
+        fetch('https://rcg-26-426-default-rtdb.firebaseio.com/ingredients.json' + query)
           .then(response => response.json())
           .then(responseData => {
             const loadedIngredients = [];
