@@ -21,6 +21,7 @@ const ingredientReducer = (currentIngredients, action) => {
 const httpReducer = (httpState, action) => {
   switch (action.type) {
     case 'SET':
+      return { loading: true, error: null };
     case 'RESPONSE':
     case 'ERROR':
     default:
@@ -29,9 +30,10 @@ const httpReducer = (httpState, action) => {
 };
 
 const Ingredients = () => {
-  const [userIngredients, dispatch] = useReducer(ingredientReducer, []);
   // const [userIngredients, setUserIngredients] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [userIngredients, dispatch] = useReducer(ingredientReducer, []);
+  // const [isLoading, setIsLoading] = useState(false);
+  const [] = useReducer(httpReducer, { loading: false, error: null });
   const [error, setError] = useState();
 
   useEffect(() => {
