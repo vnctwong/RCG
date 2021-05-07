@@ -23,6 +23,7 @@ const httpReducer = (httpState, action) => {
     case 'SET':
       return { loading: true, error: null };
     case 'RESPONSE':
+      return { ...httpState, loading: false };
     case 'ERROR':
     default:
       throw new Error('Action type DNE');
