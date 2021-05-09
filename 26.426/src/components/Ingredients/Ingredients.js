@@ -18,13 +18,14 @@ const ingredientReducer = (currentIngredients, action) => {
   }
 }
 
-const httpReducer = (httpState, action) => {
+const httpReducer = (curHttpState, action) => {
   switch (action.type) {
-    case 'SET':
+    case 'SEND':
       return { loading: true, error: null };
     case 'RESPONSE':
       return { ...httpState, loading: false };
     case 'ERROR':
+      return { loading: false, error: action.errorData }
     default:
       throw new Error('Action type DNE');
   }
@@ -34,8 +35,8 @@ const Ingredients = () => {
   // const [userIngredients, setUserIngredients] = useState([]);
   const [userIngredients, dispatch] = useReducer(ingredientReducer, []);
   // const [isLoading, setIsLoading] = useState(false);
-  const [] = useReducer(httpReducer, { loading: false, error: null });
-  const [error, setError] = useState();
+  const [httpState, dispatchHttp] = useReducer(httpReducer, { loading: false, error: null });
+  // const [error, setError] = useState();
 
   useEffect(() => {
     console.log('RENDERING INGREDIENTS', userIngredients);
@@ -47,14 +48,16 @@ const Ingredients = () => {
   }, []);
 
   const addIngredientHandler = ingredient => {
-    setIsLoading(true);
+    // setIsLoading(true);
+    dispatchHttp({ type: 'SEND' })
     fetch('https://rcg-26-426-default-rtdb.firebaseio.com/ingredients.json', {
       method: 'POST',
       body: JSON.stringify(ingredient),
       headers: { 'Content-Type': 'application/json' }
     })
       .then(response => {
-        setIsLoading(false);
+        // setIsLoading(false);
+        dispatchHttp({ type: 'RESPONSE' })
         return response.json();
       })
       .then(responseData => {
@@ -67,14 +70,16 @@ const Ingredients = () => {
   };
 
   const removeIngredientHandler = ingredientId => {
-    setIsLoading(true);
+    // setIsLoading(true);
+    dispatchHttp({ type: 'SEND' })
     fetch(
       `https://rcg-26-426-default-rtdb.firebaseio.com/ingredients/${ingredientId}.json`,
       {
         method: 'DELETE'
       }
     ).then(response => {
-      setIsLoading(false);
+      // setIsLoading(false);
+      dispatchHttp({ type: 'RESPONSE' })
       // setUserIngredients(prevIngredients =>
       //   prevIngredients.filter(ingredient => ingredient.id !== ingredientId)
       // );
