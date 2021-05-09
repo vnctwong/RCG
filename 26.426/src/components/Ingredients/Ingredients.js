@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useEffect, useCallback } from 'react';
+import React, { useReducer, useEffect, useCallback } from 'react';
 
 import IngredientForm from './IngredientForm';
 import IngredientList from './IngredientList';
@@ -23,9 +23,11 @@ const httpReducer = (curHttpState, action) => {
     case 'SEND':
       return { loading: true, error: null };
     case 'RESPONSE':
-      return { ...httpState, loading: false };
+      return { ...curHttpState, loading: false };
     case 'ERROR':
-      return { loading: false, error: action.errorData }
+      return { loading: false, error: action.errorMessage }
+    case 'CLEAR':
+      return { ...curHttpState, error: null }
     default:
       throw new Error('Action type DNE');
   }
@@ -85,22 +87,24 @@ const Ingredients = () => {
       // );
       dispatch({ type: 'DELETE', id: ingredientId });
     }).catch(error => {
-      setError('Something went wrong!');
-      setIsLoading(false);
+      // setError('Something went wrong!');
+      // setIsLoading(false);
+      dispatchHttp({ type: 'ERROR', errorMessage: 'error message here' })
     });
   };
 
   const clearError = () => {
-    setError(null);
+    // setError(null);
+    dispatchHttp({ type: 'CLEAR' })
   }
 
   return (
     <div className="App">
-      {error && <ErrorModal onClose={clearError}>{error}</ErrorModal>}
+      {httpState.error && <ErrorModal onClose={clearError}>{httpState.error}</ErrorModal>}
 
       <IngredientForm
         onAddIngredient={addIngredientHandler}
-        loading={isLoading}
+        loading={httpState.loading}
       />
 
       <section>
