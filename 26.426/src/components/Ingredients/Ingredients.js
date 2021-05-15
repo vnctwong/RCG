@@ -49,7 +49,7 @@ const Ingredients = () => {
     dispatch({ type: 'SET', ingredients: filteredIngredients });
   }, []);
 
-  const addIngredientHandler = ingredient => {
+  const addIngredientHandler = useCallback(ingredient => {
     // setIsLoading(true);
     dispatchHttp({ type: 'SEND' })
     fetch('https://rcg-26-426-default-rtdb.firebaseio.com/ingredients.json', {
@@ -69,9 +69,9 @@ const Ingredients = () => {
         // ]);
         dispatch({ type: 'ADD', ingredient: { id: responseData.name, ...ingredient } });
       });
-  };
+  }, []);
 
-  const removeIngredientHandler = ingredientId => {
+  const removeIngredientHandler = useCallback(ingredientId => {
     // setIsLoading(true);
     dispatchHttp({ type: 'SEND' })
     fetch(
@@ -91,7 +91,7 @@ const Ingredients = () => {
       // setIsLoading(false);
       dispatchHttp({ type: 'ERROR', errorMessage: 'error message here' })
     });
-  };
+  }, []);
 
   const clearError = () => {
     // setError(null);
