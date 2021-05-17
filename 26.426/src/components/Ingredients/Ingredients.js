@@ -93,10 +93,10 @@ const Ingredients = () => {
     });
   }, []);
 
-  const clearError = () => {
+  const clearError = useCallback(() => {
     // setError(null);
     dispatchHttp({ type: 'CLEAR' })
-  }
+  }, []);
 
   const ingredientList = useMemo(() => {
     return (
