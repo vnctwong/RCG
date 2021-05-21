@@ -1,3 +1,5 @@
+import useReducer from 'react';
+
 const httpReducer = (curHttpState, action) => {
   switch (action.type) {
     case 'SEND':
@@ -15,6 +17,26 @@ const httpReducer = (curHttpState, action) => {
 
 const useHttp = () => {
   const [httpState, dispatchHttp] = useReducer(httpReducer, { loading: false, error: null });
+
+  const sendRequest = (url, method, body) => {
+    dispatchHttp({ type: 'SEND' });
+    fetch(
+      url,
+      {
+        method: method,
+        body: body,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    ).then(response => {
+      dispatchHttp({ type: 'RESPONSE' })
+      dispatch({ type: 'DELETE', id: ingredientId });
+    }).catch(error => {
+      dispatchHttp({ type: 'ERROR', errorMessage: 'error message here' })
+    });
+  };
+
 };
 
 export default useHttp;

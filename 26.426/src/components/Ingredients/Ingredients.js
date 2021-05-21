@@ -74,23 +74,7 @@ const Ingredients = () => {
   const removeIngredientHandler = useCallback(ingredientId => {
     // setIsLoading(true);
     dispatchHttp({ type: 'SEND' })
-    fetch(
-      `https://rcg-26-426-default-rtdb.firebaseio.com/ingredients/${ingredientId}.json`,
-      {
-        method: 'DELETE'
-      }
-    ).then(response => {
-      // setIsLoading(false);
-      dispatchHttp({ type: 'RESPONSE' })
-      // setUserIngredients(prevIngredients =>
-      //   prevIngredients.filter(ingredient => ingredient.id !== ingredientId)
-      // );
-      dispatch({ type: 'DELETE', id: ingredientId });
-    }).catch(error => {
-      // setError('Something went wrong!');
-      // setIsLoading(false);
-      dispatchHttp({ type: 'ERROR', errorMessage: 'error message here' })
-    });
+
   }, []);
 
   const clearError = useCallback(() => {
