@@ -25,8 +25,8 @@ const Ingredients = () => {
   const { isLoading, error, data, sendRequest } = useHttp();
 
   useEffect(() => {
-    console.log('RENDERING INGREDIENTS', userIngredients);
-  }, [userIngredients]);
+    dispatch({ type: 'DELETE', })
+  }, [data]);
 
   const filteredIngredientsHandler = useCallback(filteredIngredients => {
     // setUserIngredients(filteredIngredients);
