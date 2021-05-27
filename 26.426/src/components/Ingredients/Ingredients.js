@@ -22,11 +22,18 @@ const ingredientReducer = (currentIngredients, action) => {
 const Ingredients = () => {
 
   const [userIngredients, dispatch] = useReducer(ingredientReducer, []);
-  const { isLoading, error, data, sendRequest } = useHttp();
+  const { isLoading, error, data, sendRequest, reqExtra, reqIdentifier } = useHttp();
 
   useEffect(() => {
-    dispatch({ type: 'DELETE', })
-  }, [data]);
+    if (!isLoading && !error && reqIdentifier === 'REMOVE_INGREDIENT') {
+      dispatch({ type: 'DELETE', id: reqExtra })
+    } else if (!isLoading && !error && reqIdentifier === 'ADD_INGREDIENT') {
+      dispatch({
+        type: 'ADD',
+        ingredient: { id: data.name, ...reqExtra }
+      });
+    }
+  }, [data, reqExtra, reqIdentifier, isLoading]);
 
   const filteredIngredientsHandler = useCallback(filteredIngredients => {
     // setUserIngredients(filteredIngredients);
@@ -34,6 +41,12 @@ const Ingredients = () => {
   }, []);
 
   const addIngredientHandler = useCallback(ingredient => {
+    sendRequest('https://rcg-26-426-default-rtdb.firebaseio.com/ingredients.json',
+      'POST',
+      JSON.stringify(ingredient),
+      ingredient,
+      'ADD_INGREDIENT'
+    );
 
     // dispatchHttp({ type: 'SEND' })
     // fetch('https://rcg-26-426-default-rtdb.firebaseio.com/ingredients.json', {
@@ -53,7 +66,12 @@ const Ingredients = () => {
   }, []);
 
   const removeIngredientHandler = useCallback(ingredientId => {
-    sendRequest(`https://rcg-26-426-default-rtdb.firebaseio.com/ingredients/${ingredientId}.json`, 'DELETE')
+    sendRequest(`https://rcg-26-426-default-rtdb.firebaseio.com/ingredients/${ingredientId}.json`,
+      'DELETE',
+      null,
+      ingredientId,
+      'REMOVE_INGREDIENT'
+    );
   }, [sendRequest]);
 
   const clearError = useCallback(() => {
