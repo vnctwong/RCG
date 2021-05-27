@@ -33,7 +33,7 @@ const Ingredients = () => {
         ingredient: { id: data.name, ...reqExtra }
       });
     }
-  }, [data, reqExtra, reqIdentifier, isLoading]);
+  }, [data, reqExtra, reqIdentifier, isLoading, error]);
 
   const filteredIngredientsHandler = useCallback(filteredIngredients => {
     // setUserIngredients(filteredIngredients);
