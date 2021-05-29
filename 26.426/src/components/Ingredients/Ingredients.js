@@ -36,7 +36,6 @@ const Ingredients = () => {
   }, [data, reqExtra, reqIdentifier, isLoading, error]);
 
   const filteredIngredientsHandler = useCallback(filteredIngredients => {
-    // setUserIngredients(filteredIngredients);
     dispatch({ type: 'SET', ingredients: filteredIngredients });
   }, []);
 
@@ -47,23 +46,7 @@ const Ingredients = () => {
       ingredient,
       'ADD_INGREDIENT'
     );
-
-    // dispatchHttp({ type: 'SEND' })
-    // fetch('https://rcg-26-426-default-rtdb.firebaseio.com/ingredients.json', {
-    //   method: 'POST',
-    //   body: JSON.stringify(ingredient),
-    //   headers: { 'Content-Type': 'application/json' }
-    // })
-    //   .then(response => {
-
-    //     dispatchHttp({ type: 'RESPONSE' })
-    //     return response.json();
-    //   })
-    //   .then(responseData => {
-
-    //     dispatch({ type: 'ADD', ingredient: { id: responseData.name, ...ingredient } });
-    //   });
-  }, []);
+  }, [sendRequest]);
 
   const removeIngredientHandler = useCallback(ingredientId => {
     sendRequest(`https://rcg-26-426-default-rtdb.firebaseio.com/ingredients/${ingredientId}.json`,
@@ -75,8 +58,6 @@ const Ingredients = () => {
   }, [sendRequest]);
 
   const clearError = useCallback(() => {
-
-    // dispatchHttp({ type: 'CLEAR' })
   }, []);
 
   const ingredientList = useMemo(() => {

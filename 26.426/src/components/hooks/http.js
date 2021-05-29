@@ -24,23 +24,25 @@ const useHttp = () => {
     identifier: null
   });
 
-  const sendRequest = useCallback((url, method, body, reqExtra, reqIdentifier) => {
-    dispatchHttp({ type: "SEND", identifier: reqIdentifier });
-    fetch(url, {
-      method: method,
-      body: body,
-      headers: { "Content-Type": "application/json" }
-    })
-      .then(response => {
-        return response.json();
+  const sendRequest = useCallback(
+    (url, method, body, reqExtra, reqIdentifier) => {
+      dispatchHttp({ type: "SEND", identifier: reqIdentifier });
+      fetch(url, {
+        method: method,
+        body: body,
+        headers: { "Content-Type": "application/json" }
       })
-      .then(responseData => {
-        dispatchHttp({ type: "RESPONSE", responseData: responseData, extra: reqExtra });
-      })
-      .catch(error => {
-        dispatchHttp({ type: "ERROR", errorMessage: "error message here" });
-      });
-  }, []);
+        .then(response => {
+          return response.json();
+        })
+        .then(responseData => {
+          dispatchHttp({ type: "RESPONSE", responseData: responseData, extra: reqExtra });
+        })
+        .catch(error => {
+          dispatchHttp({ type: "ERROR", errorMessage: "error message here" });
+        });
+    }, []
+  );
 
   return {
     isLoading: httpState.loading,
