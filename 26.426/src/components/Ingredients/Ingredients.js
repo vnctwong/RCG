@@ -22,7 +22,7 @@ const ingredientReducer = (currentIngredients, action) => {
 const Ingredients = () => {
 
   const [userIngredients, dispatch] = useReducer(ingredientReducer, []);
-  const { isLoading, error, data, sendRequest, reqExtra, reqIdentifier } = useHttp();
+  const { isLoading, error, data, sendRequest, reqExtra, reqIdentifier, clear } = useHttp();
 
   useEffect(() => {
     if (!isLoading && !error && reqIdentifier === 'REMOVE_INGREDIENT') {
@@ -71,7 +71,7 @@ const Ingredients = () => {
 
   return (
     <div className="App">
-      {error && <ErrorModal onClose={clearError}>{error}</ErrorModal>}
+      {error && <ErrorModal onClose={clear }>{error}</ErrorModal>}
 
       <IngredientForm
         onAddIngredient={addIngredientHandler}
