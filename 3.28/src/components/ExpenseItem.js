@@ -1,12 +1,16 @@
 import './ExpenseItem.css';
 
 function ExpenseItem() {
+  const expenseDate = new Date(yy, mm, dd)
+  const expenseTitle = 'expense';
+  const expenseAmount = '$xx.xx';
+
   return (
     <div className="expense-item">
-      <div>day month year</div>
+      <div>{expenseDate}</div>
       <div className="expense-item_description">
-        <h2>Car insurance</h2>
-        <div className="expense-item__price">$xx.xx</div>
+        <h2>{expenseTitle}</h2>
+        <div className="expense-item__price">{expenseAmount}</div>
       </div>
     </div>
   );
