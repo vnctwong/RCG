@@ -26,6 +26,7 @@ function App() {
 
   return (
     <div>
+      <h2>This is a spwa</h2>
       <Expenses items={expenses} />
     </div>
   );
