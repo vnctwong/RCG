@@ -5,7 +5,7 @@ import './ExpenseItem.css';
 import Card from '../UI/Card';
 
 const ExpenseItem = (props) => {
-  useState();
+  useState(props.title);
 
   let title = props.title;
 
