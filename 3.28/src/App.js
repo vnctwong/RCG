@@ -30,7 +30,7 @@ const App = () => {
   // return React.createElement(
   //   'div',
   //   {},
-  //   React.createElement('h2', {}, 'This is a spwa'),
+  //   React.createElement(NewExpense),
   //   React.createElement(Expenses, { items: expenses })
   // );
 
@@ -40,6 +40,6 @@ const App = () => {
       <Expenses items={expenses} />
     </div>
   );
-};
+}
 
 export default App;
